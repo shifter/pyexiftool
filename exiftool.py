@@ -323,3 +323,11 @@ class ExifTool(object):
         ``None`` if this tag was not found in the file.
         """
         return self.get_tag_batch(tag, [filename])[0]
+
+    def remove_metadata(self, filename):
+        """Remove meta-data from a single file."""
+        return self.execute_json('-all= ', '-overwrite_original_in_place', filename)
+
+    def remove_metadata_batch(self, filenames):
+        """Remove meta-data for the given files."""
+        return self.execute('-all= ', '-overwrite_original_in_place', *filenames)
